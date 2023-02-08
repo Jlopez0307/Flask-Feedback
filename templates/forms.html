@@ -1,0 +1,23 @@
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {% for field in form if field.widget.input_type != 'hidden'%}
+
+    <div class='form-group'>
+        {{ field.label }}
+        {{ field(class="form-control") }}
+
+        <span>
+            {% if field.errors %}
+                {% for error in field.errors %}
+	                <p class="alert alert-danger">{{errors}}</p>
+                {% endfor %}
+            {% endif %}
+        </span>
+
+    </div>
+
+    {% endfor %}
+    <button type="submit">Register</button>
+</form>
