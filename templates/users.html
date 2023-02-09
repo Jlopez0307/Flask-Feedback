@@ -1,0 +1,41 @@
+{% extends "base.html "%}
+
+{% block title%}{{user.username}}{% endblock %}
+
+{% block content%}
+
+
+    <div class="card position-relative py-2 px-4 " style="width: 30rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{user.username}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
+          <p class="card-text">{{user.first_name}} {{user.last_name}}</p>
+
+          <ul class="list-group list-group-flush">
+            {% for feedback in user.feedback %}
+            <li class="list-group-item">
+                <a href="/feedback/{{feedback.id}}/update" class="card-link">{{feedback.title}}</a>
+                <p class="card-text">{{feedback.content}}</p>
+                <form action="/feedback/{{feedback.id}}/delete" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+                <form action="/feedback/{{feedback.id}}/update" method="POST">
+                    <button class="btn btn-primary">Edit</button>
+                </form>
+            </li>
+            {% endfor %}
+          </ul>
+
+          <div class="card-body">
+            <a href="/users/{{user.username}}/feedback/add" class="btn btn-primary">Add Feedback</a>
+            
+            <form action="/users/{{user.username}}/delete" method="POST">
+                <button class="btn btn-danger">Delete Account</button>
+            </form>
+          </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

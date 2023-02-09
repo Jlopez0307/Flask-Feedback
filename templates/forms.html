@@ -5,13 +5,17 @@
     {% for field in form if field.widget.input_type != 'hidden'%}
 
     <div class='form-group'>
-        {{ field.label }}
-        {{ field(class="form-control") }}
+        {% if field == form.submit %}
+            {{field(class_="btn btn-primary")}}
+        {% else %}
+            {{ field.label }}
+            {{ field(class="form-control") }}
+        {% endif %}
 
         <span>
             {% if field.errors %}
                 {% for error in field.errors %}
-	                <p class="alert alert-danger">{{errors}}</p>
+	                <p class="alert alert-danger">{{error}}</p>
                 {% endfor %}
             {% endif %}
         </span>
@@ -19,5 +23,4 @@
     </div>
 
     {% endfor %}
-    <button type="submit">Register</button>
 </form>
